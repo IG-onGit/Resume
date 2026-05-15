@@ -510,6 +510,10 @@
         border-color: rgba(124, 58, 237, 0.4);
         color: var(--violet);
       }
+      .proj-status.offline {
+        border-color: rgba(187, 187, 187, 0.4);
+        color: #8c8c8c;
+      }
 
       .experimental-section {
         background: var(--bg2);
@@ -960,7 +964,7 @@
     <aside id="sidebar">
       <div class="sidebar-logo">
         <div class="name">Irakli Gzirishvili</div>
-        <div class="role">AI Integration Architect</div>
+        <div class="role">AI Integration Manager</div>
       </div>
       <nav>
         <div class="nav-item active" onclick="showSection('about',this)"><i class="fa fa-user"></i> About</div>
@@ -989,7 +993,7 @@
           <div class="about-info">
             <h1>Irakli Gzirishvili</h1>
             <ul class="specialty-list">
-              <li>AI Integration Architect</li>
+              <li>AI Integration Manager</li>
               <li>Full-Stack Software Engineer</li>
               <li>DevOps Engineer</li>
             </ul>
@@ -1015,7 +1019,7 @@
             <div>
               <div class="exp-title">AI Integration Manager</div>
               <div class="exp-company">Visa Centre International</div>
-              <div class="exp-date">November 2025 – February 2026</div>
+              <div class="exp-date">November 2025 - February 2026</div>
             </div>
             <div class="exp-right">
               <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
@@ -1052,7 +1056,7 @@
             <div>
               <div class="exp-title">Full-Stack Software Engineer</div>
               <div class="exp-company">DeveBrand (DeveMind.com)</div>
-              <div class="exp-date">July 2023 – July 2024</div>
+              <div class="exp-date">July 2023 - July 2024</div>
             </div>
             <div class="exp-right">
               <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
@@ -1081,7 +1085,7 @@
             <div>
               <div class="exp-title">Full-Stack Web Developer</div>
               <div class="exp-company">Self.Ge</div>
-              <div class="exp-date">October 2021 – November 2022</div>
+              <div class="exp-date">October 2021 - November 2022</div>
             </div>
             <div class="exp-right">
               <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
@@ -1096,7 +1100,7 @@
             </ul>
             <div class="exp-kpi">
               <div class="kpi"><span class="kpi-val g">14mo</span><span class="kpi-lbl">Intensive teamwork</span></div>
-              <div class="kpi"><span class="kpi-val p">0</span><span class="kpi-lbl">Business–tech misalignments</span></div>
+              <div class="kpi"><span class="kpi-val p">0</span><span class="kpi-lbl">Business-tech misalignments</span></div>
               <div class="kpi"><span class="kpi-val v">Full</span><span class="kpi-lbl">Stack ownership</span></div>
             </div>
           </div>
@@ -1107,7 +1111,7 @@
             <div>
               <div class="exp-title">Mass-Spectrometer Operator</div>
               <div class="exp-company">Free University of Georgia</div>
-              <div class="exp-date">2019 – 2020</div>
+              <div class="exp-date">2019 - 2020</div>
             </div>
             <div class="exp-right">
               <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
@@ -1123,7 +1127,7 @@
             <div>
               <div class="exp-title">Engineer-Constructor</div>
               <div class="exp-company">Agricultural University of Georgia</div>
-              <div class="exp-date">2018 – 2020</div>
+              <div class="exp-date">2018 - 2020</div>
             </div>
             <div class="exp-right">
               <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
@@ -1140,10 +1144,23 @@
         <h2 class="section-heading"><i class="fa fa-code-branch"></i> Projects</h2>
         <div class="projects-grid">
           <div class="proj-card">
+            <img class="proj-poster" src="aisi.png" alt=" " />
+            <div class="proj-body">
+              <div class="proj-name">AISI</div>
+              <div class="proj-role">Creator - AI Framework</div>
+              <div class="proj-desc">AISI (AI Skill Infrastructure) is a python module, providing a modular framework environment for developing powerful AI-powered workflow systems in your projects.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-download"></i> 1,254 / month</span>
+                <span class="proj-status live">pip install aisi</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
             <img class="proj-poster" src="phpshift.png" alt="PHPShift" />
             <div class="proj-body">
               <div class="proj-name">PHPShift</div>
-              <div class="proj-role">Creator - AI-Powered Full-Stack Framework</div>
+              <div class="proj-role">Creator - AI Framework</div>
               <div class="proj-desc">The world's first AI-powered full-stack PHP framework. Selects, plans, and executes AI skills based on developer needs autonomously. Built on MVC with a modular system for minimal overhead. Projects are fully AI-manageable.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-star"></i> World's First</span>
@@ -1153,23 +1170,23 @@
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="default.png" alt="DeveMind" />
+            <img class="proj-poster" src="devemind.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">DeveMind.com</div>
-              <div class="proj-role">Founder &amp; Creator - Full-Stack SaaS</div>
+              <div class="proj-role">Founder &amp; Creator - Platform</div>
               <div class="proj-desc">Production-grade project and task management SaaS platform built entirely solo - business plan, architecture, CI/CD pipelines, AI integrations, cron jobs, encryption, error tracking, and analytics.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-clock"></i> 1+ Year Production</span>
-                <span class="proj-status live">Live</span>
+                <span class="proj-status offline">Offline</span>
               </div>
             </div>
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="clight.png" alt="CLight" />
+            <img class="proj-poster" src="clight.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">CLight</div>
-              <div class="proj-role">Creator - Python CLI Framework</div>
+              <div class="proj-role">Creator - Framework</div>
               <div class="proj-desc">Lightweight Python CLI framework simplifying CLI application development and package distribution, with automatic deployment from Local, GitHub, and GitLab environments.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-download"></i> 3,356 / month</span>
@@ -1179,10 +1196,10 @@
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="gits.png" alt="Gits" />
+            <img class="proj-poster" src="gits.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">Gits</div>
-              <div class="proj-role">Creator - Python CLI Engineer</div>
+              <div class="proj-role">Creator - CLI App</div>
               <div class="proj-desc">Manage multiple GitHub and GitLab repositories and accounts from a single machine with automatic configuration preventing account conflicts - zero manual setup.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-download"></i> 640 / month</span>
@@ -1192,10 +1209,10 @@
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="docipy.png" alt="DociPy" />
+            <img class="proj-poster" src="docipy.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">DociPy</div>
-              <div class="proj-role">Creator - Python CLI Framework</div>
+              <div class="proj-role">Creator - Framework</div>
               <div class="proj-desc">Generates impressive static HTML documentation from code - reducing documentation creation from a time-consuming manual process to an automated, zero-effort workflow.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-download"></i> 861 / month</span>
@@ -1205,10 +1222,10 @@
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="xamphp.png" alt="XAMPHP" />
+            <img class="proj-poster" src="xamphp.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">XAMPHP</div>
-              <div class="proj-role">Creator - Python CLI Engineer</div>
+              <div class="proj-role">Creator - CLI App</div>
               <div class="proj-desc">Launches PHP projects via XAMPP from any Windows machine location as a virtual local host - eliminating manual path-configuration overhead for local PHP development.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-download"></i> 630 / month</span>
@@ -1218,10 +1235,10 @@
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="texet.png" alt="TexeT" />
+            <img class="proj-poster" src="texet.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">TexeT</div>
-              <div class="proj-role">Creator - AI CLI Engineer</div>
+              <div class="proj-role">Creator - AI CLI App</div>
               <div class="proj-desc">Python CLI application leveraging AI skills for intelligent content control and interaction - enabling autonomous content processing at the command line.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-download"></i> 394 / month</span>
@@ -1231,10 +1248,10 @@
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="startic.png" alt="Startic" />
+            <img class="proj-poster" src="startic.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">Startic</div>
-              <div class="proj-role">Creator - Python CLI Framework</div>
+              <div class="proj-role">Creator - Framework</div>
               <div class="proj-desc">Rapidly build and publish lightweight static webpages - reducing a traditionally manual templating process to a single automated command.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-download"></i> 204 / month</span>
@@ -1244,10 +1261,10 @@
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="youtupy.png" alt="YouTuPy" />
+            <img class="proj-poster" src="youtupy.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">YouTuPy</div>
-              <div class="proj-role">Creator - Python CLI Engineer</div>
+              <div class="proj-role">Creator - CLI App</div>
               <div class="proj-desc">Download entire YouTube playlists or individual videos as .mp4 or .mp3 files - automating a previously repetitive manual process.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-download"></i> 207 / month</span>
@@ -1257,10 +1274,10 @@
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="default.png" alt="Python MVC Desktop" />
+            <img class="proj-poster" src="desktop-mvc.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">Python MVC Desktop Framework</div>
-              <div class="proj-role">Creator - Framework Engineer</div>
+              <div class="proj-role">Creator - Framework</div>
               <div class="proj-desc">Simple, smart, and fast Python MVC framework for desktop applications - allowing developers to build fully operating desktop apps without complex UI plugin configurations.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-hourglass-half"></i> Pending Release</span>
@@ -1270,14 +1287,14 @@
           </div>
 
           <div class="proj-card">
-            <img class="proj-poster" src="default.png" alt="Dismyth.com" />
+            <img class="proj-poster" src="dismyth.png" alt=" " />
             <div class="proj-body">
               <div class="proj-name">Dismyth.com</div>
-              <div class="proj-role">Creator - Full-Stack Web Developer</div>
+              <div class="proj-role">Creator - Platform</div>
               <div class="proj-desc">Full platform for heavy metal band "Dismyth" - design, front-end, back-end (PHP), and database. Delivered in close collaboration with band members to meet creative and technical requirements.</div>
               <div class="proj-footer">
                 <span class="proj-stat"><i class="fa fa-clock"></i> 1+ Year Production</span>
-                <span class="proj-status live">Live</span>
+                <span class="proj-status offline">Offline</span>
               </div>
             </div>
           </div>
