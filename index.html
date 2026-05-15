@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Irakli Gzirishvili - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #080c12;
+        --bg2: #0f1420;
+        --bg3: #161d2e;
+        --bg4: #1c2540;
+        --cyan: #00d9ff;
+        --pink: #ff006e;
+        --green: #00ff88;
+        --purple: #7c3aed;
+        --violet: #a78bfa;
+        --text: #e2e8f0;
+        --muted: #64748b;
+        --border: #1e2d45;
+        --sidebar-w: 260px;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        overflow-x: hidden;
+      }
+
+      /* SIDEBAR */
+      #sidebar {
+        width: var(--sidebar-w);
+        min-height: 100vh;
+        background: var(--bg2);
+        border-right: 1px solid var(--border);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 100;
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar-logo {
+        padding: 28px 24px 20px;
+        border-bottom: 1px solid var(--border);
+      }
+      .sidebar-logo .initials {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, var(--cyan), var(--purple));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+      .sidebar-logo .name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.3;
+      }
+      .sidebar-logo .role {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-top: 3px;
+      }
+
+      nav {
+        flex: 1;
+        padding: 16px 0;
+        overflow-y: auto;
+      }
+      .nav-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 8px 24px 4px;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 24px;
+        cursor: pointer;
+        color: var(--muted);
+        font-size: 1rem;
+        border-left: 3px solid transparent;
+        transition: all 0.2s;
+        user-select: none;
+      }
+      .nav-item i {
+        width: 18px;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+      .nav-item:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .nav-item.active {
+        color: var(--cyan);
+        border-left-color: var(--cyan);
+        background: rgba(0, 217, 255, 0.06);
+      }
+
+      .sidebar-footer {
+        padding: 16px 24px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        gap: 14px;
+      }
+      .sidebar-footer a {
+        color: var(--muted);
+        font-size: 1rem;
+        transition: color 0.2s;
+        text-decoration: none;
+      }
+      .sidebar-footer a:hover {
+        color: var(--cyan);
+      }
+
+      /* HAMBURGER */
+      #hamburger {
+        display: none;
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 200;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+      }
+      #overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 90;
+      }
+
+      /* MAIN */
+      #main {
+        margin-left: var(--sidebar-w);
+        flex: 1;
+        min-height: 100vh;
+        padding: 48px 52px;
+        max-width: calc(100vw - var(--sidebar-w));
+      }
+
+      /* SECTIONS */
+      .section {
+        display: none;
+        animation: fadeUp 0.4s ease;
+      }
+      .section.active {
+        display: block;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-heading {
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: var(--cyan);
+        margin-bottom: 32px;
+        padding-bottom: 14px;
+        border-bottom: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .section-heading i {
+        font-size: 1.5rem;
+      }
+
+      /* ABOUT */
+      .about-hero {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+      .about-photo {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #989;
+        flex-shrink: 0;
+      }
+      .about-info h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--cyan), var(--pink));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 10px;
+      }
+      .specialty-list {
+        list-style: none;
+        margin: 12px 0;
+      }
+      .specialty-list li {
+        font-size: 1rem;
+        color: white;
+        padding: 4px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .specialty-list li::before {
+        content: "▹";
+        color: var(--cyan);
+      }
+
+      .about-summary {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 28px 32px;
+        font-size: 1.05rem;
+        line-height: 1.85;
+        color: #a8b8cc;
+        margin-bottom: 32px;
+      }
+
+      .kpi-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 14px;
+      }
+      .kpi {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 18px 14px;
+        text-align: center;
+        transition: transform 0.2s, border-color 0.2s;
+      }
+      .kpi:hover {
+        transform: translateY(-3px);
+        border-color: var(--cyan);
+      }
+      .kpi-val {
+        font-size: 1.6rem;
+        font-weight: 700;
+        display: block;
+        line-height: 1;
+      }
+      .kpi-val.c {
+        color: var(--cyan);
+      }
+      .kpi-val.g {
+        color: var(--green);
+      }
+      .kpi-val.p {
+        color: var(--pink);
+      }
+      .kpi-val.v {
+        color: var(--violet);
+      }
+      .kpi-lbl {
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-top: 6px;
+        display: block;
+        line-height: 1.4;
+      }
+
+      /* EXPERIENCE */
+      .exp-block {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--cyan);
+        border-radius: 12px;
+        margin-bottom: 18px;
+        overflow: hidden;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .exp-block:hover {
+        box-shadow: 0 6px 24px rgba(0, 217, 255, 0.1);
+      }
+      .exp-header {
+        padding: 22px 26px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .exp-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--cyan);
+      }
+      .exp-company {
+        font-size: 0.95rem;
+        color: var(--text);
+        margin-top: 3px;
+      }
+      .exp-date {
+        font-size: 0.82rem;
+        color: var(--muted);
+        font-style: italic;
+        margin-top: 4px;
+      }
+      .exp-right {
+        display: flex;
+        align-items: center;
+      }
+      .btn-details {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        padding: 8px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-family: Arial, sans-serif;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        white-space: nowrap;
+      }
+      .btn-details:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+      }
+      .btn-details.open {
+        border-color: var(--pink);
+        color: var(--pink);
+      }
+
+      .exp-details {
+        display: none;
+        padding: 0 26px 26px;
+        border-top: 1px solid var(--border);
+      }
+      .exp-details.open {
+        display: block;
+        animation: fadeUp 0.3s ease;
+      }
+      .exp-details p {
+        color: #94a3b8;
+        line-height: 1.8;
+        margin: 16px 0 12px;
+      }
+      .exp-details ul {
+        list-style: none;
+        padding: 0;
+      }
+      .exp-details li {
+        padding: 6px 0 6px 22px;
+        position: relative;
+        color: #94a3b8;
+        line-height: 1.7;
+        font-size: 0.95rem;
+      }
+      .exp-details li::before {
+        content: "▹";
+        position: absolute;
+        left: 0;
+        color: var(--cyan);
+      }
+
+      .exp-kpi {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .exp-kpi .kpi {
+        padding: 12px 10px;
+      }
+      .exp-kpi .kpi-val {
+        font-size: 1.3rem;
+      }
+
+      .arch-note {
+        margin-top: 18px;
+        background: rgba(0, 217, 255, 0.04);
+        border: 1px solid rgba(0, 217, 255, 0.2);
+        border-radius: 10px;
+        padding: 16px 20px;
+        font-size: 0.92rem;
+        color: #7ea8c0;
+        line-height: 1.7;
+      }
+      .arch-note strong {
+        color: var(--green);
+      }
+
+      /* PROJECTS */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 22px;
+        margin-bottom: 40px;
+      }
+      .proj-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        display: flex;
+        flex-direction: column;
+      }
+      .proj-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 217, 255, 0.12);
+        border-color: rgba(0, 217, 255, 0.3);
+      }
+      .proj-poster {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        background: var(--bg3);
+        display: block;
+      }
+      .proj-body {
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .proj-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--cyan);
+        margin-bottom: 5px;
+      }
+      .proj-role {
+        font-size: 0.8rem;
+        color: white;
+        margin-bottom: 10px;
+      }
+      .proj-desc {
+        font-size: 0.88rem;
+        color: #94a3b8;
+        line-height: 1.65;
+        flex: 1;
+      }
+      .proj-footer {
+        margin-top: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .proj-stat {
+        font-size: 0.8rem;
+        color: var(--green);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .proj-status {
+        font-size: 0.72rem;
+        padding: 4px 10px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+      .proj-status.live {
+        border-color: rgba(0, 255, 136, 0.4);
+        color: var(--green);
+      }
+      .proj-status.pending {
+        border-color: rgba(124, 58, 237, 0.4);
+        color: var(--violet);
+      }
+
+      .experimental-section {
+        background: var(--bg2);
+        border: 1px solid rgba(124, 58, 237, 0.25);
+        border-radius: 14px;
+        padding: 28px 32px;
+      }
+      .experimental-section h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--violet);
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .exp-list {
+        list-style: none;
+        columns: 2;
+        gap: 20px;
+      }
+      .exp-list li {
+        padding: 6px 0 6px 22px;
+        position: relative;
+        color: #94a3b8;
+        font-size: 0.9rem;
+        line-height: 1.55;
+        break-inside: avoid;
+      }
+      .exp-list li::before {
+        content: "⚡";
+        position: absolute;
+        left: 0;
+        color: var(--violet);
+        font-size: 0.8rem;
+      }
+
+      /* SKILLS */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 18px;
+      }
+      .skill-cat {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 22px;
+        transition: border-color 0.2s, transform 0.2s;
+      }
+      .skill-cat:hover {
+        border-color: var(--cyan);
+        transform: translateY(-3px);
+      }
+      .skill-cat-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        color: var(--cyan);
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tag {
+        font-size: 0.8rem;
+        padding: 5px 12px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: #94a3b8;
+        transition: all 0.2s;
+      }
+      .tag:hover {
+        background: var(--cyan);
+        color: var(--bg);
+        border-color: var(--cyan);
+      }
+
+      /* SOFT SKILLS */
+      .strengths-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 14px;
+        margin-bottom: 36px;
+      }
+      .strength {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--pink);
+        border-radius: 10px;
+        padding: 16px 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #94a3b8;
+        transition: all 0.2s;
+      }
+      .strength:hover {
+        color: var(--pink);
+        border-left-color: var(--cyan);
+        transform: translateX(4px);
+      }
+
+      .languages-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .lang-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px 36px;
+        text-align: center;
+        flex: 1;
+        min-width: 140px;
+        transition: all 0.2s;
+      }
+      .lang-card:hover {
+        border-color: var(--cyan);
+        transform: scale(1.04);
+      }
+      .lang-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--cyan);
+        margin-bottom: 4px;
+      }
+      .lang-level {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      /* CERTIFICATIONS */
+      .certs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+        gap: 18px;
+      }
+      .cert-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        transition: all 0.2s;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .cert-card-block {
+        display: flex;
+        margin-bottom: 10px;
+      }
+
+      .cert-card-header {
+        display: block;
+        padding-left: 10px;
+      }
+
+      .cert-card:hover {
+        border-color: var(--violet);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+      }
+      .cert-icon {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        background: rgba(124, 58, 237, 0.15);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: var(--violet);
+      }
+      .cert-title {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: var(--violet);
+      }
+      .cert-provider {
+        font-size: 0.82rem;
+        color: white;
+      }
+      .cert-desc {
+        font-size: 0.85rem;
+        color: #64748b;
+        line-height: 1.55;
+        flex: 1;
+      }
+      .cert-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.8rem;
+        color: var(--violet);
+        text-decoration: none;
+        border: 1px solid rgba(124, 58, 237, 0.3);
+        padding: 6px 14px;
+        border-radius: 6px;
+        transition: all 0.2s;
+        width: fit-content;
+      }
+      .cert-link:hover {
+        background: rgba(124, 58, 237, 0.15);
+        border-color: var(--violet);
+      }
+
+      /* PUBLICATIONS */
+      .pubs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 22px;
+      }
+      .pub-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        transition: all 0.2s;
+        display: flex;
+        flex-direction: column;
+      }
+      .pub-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(255, 0, 110, 0.12);
+        border-color: rgba(255, 0, 110, 0.3);
+      }
+      .pub-poster {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: var(--bg3);
+        display: block;
+      }
+      .pub-body {
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .pub-tag {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--pink);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .pub-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 5px;
+        line-height: 1.4;
+      }
+      .pub-author {
+        margin-bottom: 10px;
+      }
+      .pub-intro {
+        font-size: 0.87rem;
+        color: #64748b;
+        line-height: 1.6;
+        flex: 1;
+      }
+      .pub-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-top: 16px;
+        font-size: 0.82rem;
+        color: var(--pink);
+        text-decoration: none;
+        border: 1px solid rgba(255, 0, 110, 0.3);
+        padding: 7px 16px;
+        border-radius: 7px;
+        transition: all 0.2s;
+        width: fit-content;
+      }
+      .pub-link:hover {
+        background: rgba(255, 0, 110, 0.1);
+        border-color: var(--pink);
+      }
+
+      /* CONTACT */
+      .contact-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 18px;
+        margin-bottom: 36px;
+      }
+      .contact-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 28px 24px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .contact-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--cyan);
+        box-shadow: 0 8px 24px rgba(0, 217, 255, 0.15);
+      }
+      .contact-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+      }
+      .contact-icon.li {
+        background: rgba(10, 102, 194, 0.2);
+        color: #0a66c2;
+      }
+      .contact-icon.gh {
+        background: rgba(255, 255, 255, 0.07);
+        color: #e2e8f0;
+      }
+      .contact-icon.x {
+        background: rgba(255, 255, 255, 0.07);
+        color: #e2e8f0;
+      }
+      .contact-icon.em {
+        background: rgba(0, 217, 255, 0.1);
+        color: var(--cyan);
+      }
+      .contact-icon.ph {
+        background: rgba(0, 255, 136, 0.1);
+        color: var(--green);
+      }
+      .contact-label {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .contact-val {
+        font-size: 1rem;
+        color: var(--muted);
+      }
+
+      .availability {
+        background: linear-gradient(135deg, rgba(0, 255, 136, 0.08), rgba(0, 217, 255, 0.08));
+        border: 1px solid rgba(0, 255, 136, 0.3);
+        border-radius: 14px;
+        padding: 28px 32px;
+        text-align: center;
+      }
+      .availability p {
+        font-size: 1.1rem;
+        color: #94a3b8;
+        font-style: italic;
+      }
+      .avail-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: var(--green);
+        border-radius: 50%;
+        margin-right: 8px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 0 8px rgba(0, 255, 136, 0);
+        }
+      }
+
+      .sub-heading {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
+      .sub-heading + .sub-heading {
+        margin-top: 32px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        #sidebar {
+          transform: translateX(calc(-1 * var(--sidebar-w)));
+        }
+        #sidebar.open {
+          transform: translateX(0);
+        }
+        #hamburger {
+          display: flex;
+        }
+        #overlay.show {
+          display: block;
+        }
+        #main {
+          margin-left: 0;
+          max-width: 100vw;
+          padding: 64px 20px 32px;
+        }
+        .exp-list {
+          columns: 1;
+        }
+        .about-hero {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .about-info h1 {
+          font-size: 1.7rem;
+        }
+      }
+      @media (max-width: 600px) {
+        .projects-grid,
+        .certs-grid,
+        .pubs-grid,
+        .contact-cards {
+          grid-template-columns: 1fr;
+        }
+        .kpi-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="hamburger" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
+    <div id="overlay" onclick="toggleSidebar()"></div>
+
+    <aside id="sidebar">
+      <div class="sidebar-logo">
+        <div class="name">Irakli Gzirishvili</div>
+        <div class="role">AI Integration Architect</div>
+      </div>
+      <nav>
+        <div class="nav-item active" onclick="showSection('about',this)"><i class="fa fa-user"></i> About</div>
+        <div class="nav-item" onclick="showSection('experience',this)"><i class="fa fa-briefcase"></i> Experience</div>
+        <div class="nav-item" onclick="showSection('projects',this)"><i class="fa fa-code-branch"></i> Projects</div>
+        <div class="nav-item" onclick="showSection('hardskills',this)"><i class="fa fa-microchip"></i> Hard Skills</div>
+        <div class="nav-item" onclick="showSection('softskills',this)"><i class="fa fa-brain"></i> Soft Skills</div>
+        <div class="nav-item" onclick="showSection('certifications',this)"><i class="fa fa-certificate"></i> Certifications</div>
+        <div class="nav-item" onclick="showSection('publications',this)"><i class="fa fa-newspaper"></i> Publications</div>
+        <div class="nav-item" onclick="showSection('contact',this)"><i class="fa fa-envelope"></i> Contact</div>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="https://linkedin.com/in/ig-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/IG-onGit" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://x.com/IG_onX" target="_blank" title="X"><i class="fab fa-x-twitter"></i></a>
+        <a href="mailto:gziraklirex@gmail.com" title="Email"><i class="fa fa-envelope"></i></a>
+      </div>
+    </aside>
+
+    <main id="main">
+      <!-- ABOUT -->
+      <section id="about" class="section active">
+        <h2 class="section-heading"><i class="fa fa-user"></i> About</h2>
+        <div class="about-hero">
+          <img class="about-photo" src="author.png" alt="Irakli Gzirishvili" />
+          <div class="about-info">
+            <h1>Irakli Gzirishvili</h1>
+            <ul class="specialty-list">
+              <li>AI Integration Architect</li>
+              <li>Full-Stack Software Engineer</li>
+              <li>DevOps Engineer</li>
+            </ul>
+          </div>
+        </div>
+        <div class="about-summary">Results-driven AI Integration Architect and Full-Stack Software Engineer with a proven track record of designing and deploying autonomous systems that produce measurable, real-time business impact. Specialist in architecting end-to-end integration strategies that connect AI services, APIs, and business workflows into self-operating pipelines - with every architectural decision evaluated for performance, reliability, and cost-efficiency. I have personally reduced manual operational procedures to zero through intelligent automation, built production platforms serving live users, and shipped open-source tools downloaded thousands of times monthly.</div>
+        <div class="kpi-row">
+          <div class="kpi"><span class="kpi-val p">0</span><span class="kpi-lbl">Manual procedures after automations</span></div>
+          <div class="kpi"><span class="kpi-val g">100%</span><span class="kpi-lbl">AI-driven real-time results</span></div>
+          <div class="kpi"><span class="kpi-val c">4+</span><span class="kpi-lbl">Production systems shipped</span></div>
+          <div class="kpi"><span class="kpi-val v">5,500+</span><span class="kpi-lbl">Monthly OSS downloads</span></div>
+          <div class="kpi"><span class="kpi-val g">5+</span><span class="kpi-lbl">Years of full-stack engineering</span></div>
+          <div class="kpi"><span class="kpi-val c">15+</span><span class="kpi-lbl">APIs &amp; AI services integrated</span></div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience" class="section">
+        <h2 class="section-heading"><i class="fa fa-briefcase"></i> Experience</h2>
+
+        <div class="exp-block">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">AI Integration Manager</div>
+              <div class="exp-company">Visa Centre International</div>
+              <div class="exp-date">November 2025 – February 2026</div>
+            </div>
+            <div class="exp-right">
+              <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
+            </div>
+          </div>
+          <div class="exp-details">
+            <p>Led end-to-end design and deployment of AI-powered business systems and autonomous automation pipelines that transformed operational efficiency, eliminated manual bottlenecks, and delivered real-time intelligence to every layer of the organisation.</p>
+            <ul>
+              <li>Designed and deployed a full-stack business management platform (PHP, JavaScript, MySQL) consolidating all operations into a single autonomous system</li>
+              <li>Integrated AI services into core workflows including intelligent chatbots, automated content generation, and real-time case analysis - reducing staff response time from hours to seconds</li>
+              <li>Built and deployed AI-powered customer support chatbots and automated news generation systems operating fully autonomously 24/7</li>
+              <li>Developed internal workflow automation for case management, service tracking, appointment scheduling, and team coordination</li>
+              <li>Implemented automated communication pipelines (email &amp; SMS) removing all manual notification processes entirely</li>
+              <li>Integrated AI-driven autonomous messaging into Facebook and Instagram for real-time customer engagement</li>
+              <li>Developed AI marketing content generation systems (posters, video, copy) replacing manual creative production cycles</li>
+              <li>Designed fully automated invoice generation and reporting pipelines</li>
+              <li>Managed 15+ API integrations across AI services, messaging platforms, analytics, and external providers</li>
+              <li>Built analytics dashboards delivering real-time performance metrics to leadership</li>
+            </ul>
+            <div class="exp-kpi">
+              <div class="kpi"><span class="kpi-val p">0</span><span class="kpi-lbl">Manual notification steps</span></div>
+              <div class="kpi"><span class="kpi-val p">0</span><span class="kpi-lbl">Manual invoice steps</span></div>
+              <div class="kpi"><span class="kpi-val g">24/7</span><span class="kpi-lbl">AI chatbot uptime</span></div>
+              <div class="kpi"><span class="kpi-val c">15+</span><span class="kpi-lbl">APIs integrated</span></div>
+              <div class="kpi"><span class="kpi-val g">&lt;5s</span><span class="kpi-lbl">AI response time</span></div>
+              <div class="kpi"><span class="kpi-val p">0</span><span class="kpi-lbl">Manual social moderation</span></div>
+            </div>
+            <div class="arch-note">Every integration was designed with a <strong>cost-first, autonomy-first</strong> philosophy - evaluating all available AI and cloud service providers against performance benchmarks and pricing models, selecting solutions that delivered maximum capability at minimum operational cost.</div>
+          </div>
+        </div>
+
+        <div class="exp-block">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Full-Stack Software Engineer</div>
+              <div class="exp-company">DeveBrand (DeveMind.com)</div>
+              <div class="exp-date">July 2023 – July 2024</div>
+            </div>
+            <div class="exp-right">
+              <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
+            </div>
+          </div>
+          <div class="exp-details">
+            <p>Sole engineer responsible for the complete development lifecycle of a production-grade project and task management SaaS platform - from architecture and algorithms to hosting, CI/CD, AI integrations, analytics, and business strategy.</p>
+            <ul>
+              <li>Architected and delivered the entire system stack: front-end, back-end (PHP), database, hosting, CI/CD pipelines, API and AI integrations as a solo engineer</li>
+              <li>Implemented cron-driven automation, buffer generators, and caching strategies eliminating all manual operational tasks post-launch</li>
+              <li>Integrated AI tools and automation services into the platform's core workflows</li>
+              <li>Deployed storage encryption, error trackers, and mail schedulers - a production-hardened, self-managing system</li>
+              <li>Wrote the business plan and owned the full product strategy as founder</li>
+            </ul>
+            <div class="exp-kpi">
+              <div class="kpi"><span class="kpi-val g">1yr+</span><span class="kpi-lbl">Production uptime</span></div>
+              <div class="kpi"><span class="kpi-val p">0</span><span class="kpi-lbl">Post-launch manual ops</span></div>
+              <div class="kpi"><span class="kpi-val c">1</span><span class="kpi-lbl">Engineer, full delivery</span></div>
+              <div class="kpi"><span class="kpi-val v">10+</span><span class="kpi-lbl">Integrated components</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-block">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Full-Stack Web Developer</div>
+              <div class="exp-company">Self.Ge</div>
+              <div class="exp-date">October 2021 – November 2022</div>
+            </div>
+            <div class="exp-right">
+              <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
+            </div>
+          </div>
+          <div class="exp-details">
+            <p>Only permanent developer on a fast-growing HR management platform for 14 months. Built features and complex systems end-to-end in close collaboration with the product manager.</p>
+            <ul>
+              <li>Developed the HR management system from the ground up - design, front-end, back-end (PHP), and database as the sole permanent engineer</li>
+              <li>Partnered with management on logical task planning to bridge business requirements and system capabilities</li>
+              <li>Maintained continuous delivery of new features across a 14-month production tenure on a rapidly growing user base</li>
+            </ul>
+            <div class="exp-kpi">
+              <div class="kpi"><span class="kpi-val g">14mo</span><span class="kpi-lbl">Intensive teamwork</span></div>
+              <div class="kpi"><span class="kpi-val p">0</span><span class="kpi-lbl">Business–tech misalignments</span></div>
+              <div class="kpi"><span class="kpi-val v">Full</span><span class="kpi-lbl">Stack ownership</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-block">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Mass-Spectrometer Operator</div>
+              <div class="exp-company">Free University of Georgia</div>
+              <div class="exp-date">2019 – 2020</div>
+            </div>
+            <div class="exp-right">
+              <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
+            </div>
+          </div>
+          <div class="exp-details">
+            <p>Responsible for the proper operation of modern thermo-scientific equipment - EA 1112 Elemental Analyzer &amp; Mass-Spectrometer - in an academic research environment.</p>
+          </div>
+        </div>
+
+        <div class="exp-block">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Engineer-Constructor</div>
+              <div class="exp-company">Agricultural University of Georgia</div>
+              <div class="exp-date">2018 – 2020</div>
+            </div>
+            <div class="exp-right">
+              <button class="btn-details" onclick="toggleDetails(this)"><i class="fa fa-chevron-down"></i> Details</button>
+            </div>
+          </div>
+          <div class="exp-details">
+            <p>Modelled and designed mechanisms and structures using professional CAD software, developing precision engineering solutions for academic and applied projects.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="section">
+        <h2 class="section-heading"><i class="fa fa-code-branch"></i> Projects</h2>
+        <div class="projects-grid">
+          <div class="proj-card">
+            <img class="proj-poster" src="phpshift.png" alt="PHPShift" />
+            <div class="proj-body">
+              <div class="proj-name">PHPShift</div>
+              <div class="proj-role">Creator - AI-Powered Full-Stack Framework</div>
+              <div class="proj-desc">The world's first AI-powered full-stack PHP framework. Selects, plans, and executes AI skills based on developer needs autonomously. Built on MVC with a modular system for minimal overhead. Projects are fully AI-manageable.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-star"></i> World's First</span>
+                <span class="proj-status live">phpshift.com</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="default.png" alt="DeveMind" />
+            <div class="proj-body">
+              <div class="proj-name">DeveMind.com</div>
+              <div class="proj-role">Founder &amp; Creator - Full-Stack SaaS</div>
+              <div class="proj-desc">Production-grade project and task management SaaS platform built entirely solo - business plan, architecture, CI/CD pipelines, AI integrations, cron jobs, encryption, error tracking, and analytics.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-clock"></i> 1+ Year Production</span>
+                <span class="proj-status live">Live</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="clight.png" alt="CLight" />
+            <div class="proj-body">
+              <div class="proj-name">CLight</div>
+              <div class="proj-role">Creator - Python CLI Framework</div>
+              <div class="proj-desc">Lightweight Python CLI framework simplifying CLI application development and package distribution, with automatic deployment from Local, GitHub, and GitLab environments.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-download"></i> 3,356 / month</span>
+                <span class="proj-status live">pip install clight</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="gits.png" alt="Gits" />
+            <div class="proj-body">
+              <div class="proj-name">Gits</div>
+              <div class="proj-role">Creator - Python CLI Engineer</div>
+              <div class="proj-desc">Manage multiple GitHub and GitLab repositories and accounts from a single machine with automatic configuration preventing account conflicts - zero manual setup.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-download"></i> 640 / month</span>
+                <span class="proj-status live">pip install gits</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="docipy.png" alt="DociPy" />
+            <div class="proj-body">
+              <div class="proj-name">DociPy</div>
+              <div class="proj-role">Creator - Python CLI Framework</div>
+              <div class="proj-desc">Generates impressive static HTML documentation from code - reducing documentation creation from a time-consuming manual process to an automated, zero-effort workflow.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-download"></i> 861 / month</span>
+                <span class="proj-status live">pip install docipy</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="xamphp.png" alt="XAMPHP" />
+            <div class="proj-body">
+              <div class="proj-name">XAMPHP</div>
+              <div class="proj-role">Creator - Python CLI Engineer</div>
+              <div class="proj-desc">Launches PHP projects via XAMPP from any Windows machine location as a virtual local host - eliminating manual path-configuration overhead for local PHP development.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-download"></i> 630 / month</span>
+                <span class="proj-status live">pip install xamphp</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="texet.png" alt="TexeT" />
+            <div class="proj-body">
+              <div class="proj-name">TexeT</div>
+              <div class="proj-role">Creator - AI CLI Engineer</div>
+              <div class="proj-desc">Python CLI application leveraging AI skills for intelligent content control and interaction - enabling autonomous content processing at the command line.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-download"></i> 394 / month</span>
+                <span class="proj-status live">pip install texet</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="startic.png" alt="Startic" />
+            <div class="proj-body">
+              <div class="proj-name">Startic</div>
+              <div class="proj-role">Creator - Python CLI Framework</div>
+              <div class="proj-desc">Rapidly build and publish lightweight static webpages - reducing a traditionally manual templating process to a single automated command.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-download"></i> 204 / month</span>
+                <span class="proj-status live">pip install startic</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="youtupy.png" alt="YouTuPy" />
+            <div class="proj-body">
+              <div class="proj-name">YouTuPy</div>
+              <div class="proj-role">Creator - Python CLI Engineer</div>
+              <div class="proj-desc">Download entire YouTube playlists or individual videos as .mp4 or .mp3 files - automating a previously repetitive manual process.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-download"></i> 207 / month</span>
+                <span class="proj-status live">pip install youtupy</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="default.png" alt="Python MVC Desktop" />
+            <div class="proj-body">
+              <div class="proj-name">Python MVC Desktop Framework</div>
+              <div class="proj-role">Creator - Framework Engineer</div>
+              <div class="proj-desc">Simple, smart, and fast Python MVC framework for desktop applications - allowing developers to build fully operating desktop apps without complex UI plugin configurations.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-hourglass-half"></i> Pending Release</span>
+                <span class="proj-status pending">Upcoming</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="proj-card">
+            <img class="proj-poster" src="default.png" alt="Dismyth.com" />
+            <div class="proj-body">
+              <div class="proj-name">Dismyth.com</div>
+              <div class="proj-role">Creator - Full-Stack Web Developer</div>
+              <div class="proj-desc">Full platform for heavy metal band "Dismyth" - design, front-end, back-end (PHP), and database. Delivered in close collaboration with band members to meet creative and technical requirements.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-clock"></i> 1+ Year Production</span>
+                <span class="proj-status live">Live</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="experimental-section">
+          <h3><i class="fa fa-flask"></i> Additional Experimental Projects</h3>
+          <ul class="exp-list">
+            <li>Security plugin reducing cyber vulnerability risk across PHP projects</li>
+            <li>Python AI task management CLI application - automates nearly any repeatable task</li>
+            <li>Live tracking and route planning map using Google Maps API manipulations (PHP)</li>
+            <li>Real-time live chat boxes via WebSocket connections</li>
+            <li>Python CLI tool to regenerate system components across all project types and stacks</li>
+            <li>Dedicated version control system for managing development packages (PHP)</li>
+            <li>Python desktop application for workspace management, code generation, AI-powered advising, and production monitoring via API</li>
+            <li>Warehouse management desktop application (VB + Microsoft Access)</li>
+            <li>Desktop AI assistant (PHP + Python)</li>
+            <li>Excel API integration using VB</li>
+            <li>Voice-controlled CI/CD pipelines (PHP + Python + CLI)</li>
+            <li>Lightweight PHP testing plugin for service status checking</li>
+            <li>Python CLI application generating AI course plans and slides for any field of study</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- HARD SKILLS -->
+      <section id="hardskills" class="section">
+        <h2 class="section-heading"><i class="fa fa-microchip"></i> Hard Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-server"></i> Backend Development</div>
+            <div class="tags"><span class="tag">PHP</span><span class="tag">Python</span><span class="tag">Composer</span> <span class="tag">OOP</span><span class="tag">MVC</span><span class="tag">REST APIs</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-robot"></i> AI &amp; Automation</div>
+            <div class="tags"><span class="tag">AI Integration</span><span class="tag">LLM APIs</span><span class="tag">AI Chatbots</span> <span class="tag">Workflow Automation</span><span class="tag">AI Content Gen</span> <span class="tag">Prompt Engineering</span><span class="tag">Autonomous Pipelines</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-database"></i> Databases</div>
+            <div class="tags"><span class="tag">MySQL</span><span class="tag">MariaDB</span><span class="tag">Oracle</span> <span class="tag">Supabase</span><span class="tag">SQL</span><span class="tag">PL/SQL</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-palette"></i> Frontend Development</div>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">ES6</span><span class="tag">jQuery</span> <span class="tag">Ajax</span><span class="tag">HTML</span><span class="tag">CSS</span> <span class="tag">SCSS</span><span class="tag">Bootstrap</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-cloud"></i> DevOps &amp; Cloud</div>
+            <div class="tags"><span class="tag">CI/CD</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span> <span class="tag">GitLab CI</span><span class="tag">Apache</span><span class="tag">Cron Jobs</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fab fa-git-alt"></i> Version Control</div>
+            <div class="tags">
+              <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">GitLab</span>
+              <span class="tag">Sentry</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-file-code"></i> Data Formats</div>
+            <div class="tags"><span class="tag">XML</span><span class="tag">JSON</span><span class="tag">YML</span><span class="tag">CSV</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-vial"></i> Testing &amp; Quality</div>
+            <div class="tags"><span class="tag">PHPUnit</span><span class="tag">Testing Frameworks</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-plug"></i> API Integrations</div>
+            <div class="tags"><span class="tag">Payment APIs</span><span class="tag">Google Apps Script</span> <span class="tag">SMS APIs</span><span class="tag">Social Media APIs</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-tools"></i> Development Tools</div>
+            <div class="tags"><span class="tag">VS Code</span><span class="tag">NetBeans</span><span class="tag">DBeaver</span> <span class="tag">DBGate</span><span class="tag">Figma</span><span class="tag">SQL Developer</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-desktop"></i> Operating Systems</div>
+            <div class="tags"><span class="tag">Windows 10</span><span class="tag">Ubuntu</span></div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-title"><i class="fa fa-shield-alt"></i> Security</div>
+            <div class="tags"><span class="tag">SQL Injection Prevention</span><span class="tag">XSS Protection</span> <span class="tag">CSRF Protection</span><span class="tag">Session Security</span> <span class="tag">RCE Prevention</span><span class="tag">DoS/DDoS Mitigation</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOFT SKILLS -->
+      <section id="softskills" class="section">
+        <h2 class="section-heading"><i class="fa fa-brain"></i> Soft Skills</h2>
+        <div class="sub-heading">Core Strengths</div>
+        <div class="strengths-grid">
+          <div class="strength"><i class="fa fa-sitemap" style="margin-right: 8px; color: var(--cyan)"></i>Integration Architecture</div>
+          <div class="strength"><i class="fa fa-cogs" style="margin-right: 8px; color: var(--cyan)"></i>Autonomous System Design</div>
+          <div class="strength"><i class="fa fa-chess" style="margin-right: 8px; color: var(--cyan)"></i>Strategic Planning</div>
+          <div class="strength"><i class="fa fa-coins" style="margin-right: 8px; color: var(--cyan)"></i>Cost-Optimised Engineering</div>
+          <div class="strength"><i class="fa fa-lightbulb" style="margin-right: 8px; color: var(--cyan)"></i>Creative Problem Solving</div>
+          <div class="strength"><i class="fa fa-clock" style="margin-right: 8px; color: var(--cyan)"></i>Time &amp; Task Management</div>
+          <div class="strength"><i class="fa fa-users" style="margin-right: 8px; color: var(--cyan)"></i>Teamwork</div>
+          <div class="strength"><i class="fa fa-expand-arrows-alt" style="margin-right: 8px; color: var(--cyan)"></i>Outside-the-Box Thinking</div>
+        </div>
+        <div class="sub-heading" style="margin-top: 32px; margin-bottom: 16px">Languages</div>
+        <div class="languages-row">
+          <div class="lang-card">
+            <div class="lang-name"><i class="fa fa-comment" style="font-size: 0.9rem; margin-right: 6px"></i>Georgian</div>
+            <div class="lang-level">Native</div>
+          </div>
+          <div class="lang-card">
+            <div class="lang-name"><i class="fa fa-comment" style="font-size: 0.9rem; margin-right: 6px"></i>English</div>
+            <div class="lang-level">Fluent</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CERTIFICATIONS -->
+      <section id="certifications" class="section">
+        <h2 class="section-heading"><i class="fa fa-certificate"></i> Certifications</h2>
+        <div class="certs-grid">
+          <div class="cert-card">
+            <div class="cert-card-block">
+              <div class="cert-icon"><i class="fa fa-infinity"></i></div>
+              <div class="cert-card-header">
+                <div class="cert-title">Introduction to DevOps</div>
+                <div class="cert-provider">IBM Skills Network</div>
+              </div>
+            </div>
+            <div class="cert-desc">Foundations of DevOps culture, practices, and tools including CI/CD, automation, and collaborative workflows.</div>
+            <a href="Introdu ction to DevOps.pdf" class="cert-link" target="_blank"><i class="fa fa-file-pdf"></i> View Certificate</a>
+          </div>
+          <div class="cert-card">
+            <div class="cert-card-block">
+              <div class="cert-icon"><i class="fab fa-python"></i></div>
+              <div class="cert-card-header">
+                <div class="cert-title">Python for Data Science, AI &amp; Development</div>
+                <div class="cert-provider">IBM Skills Network</div>
+              </div>
+            </div>
+            <div class="cert-desc">Python programming for data science, machine learning, and AI application development including libraries and APIs.</div>
+            <a href="Python for Data Science, AI & Development.pdf" class="cert-link" target="_blank"><i class="fa fa-file-pdf"></i> View Certificate</a>
+          </div>
+          <div class="cert-card">
+            <div class="cert-card-block">
+              <div class="cert-icon"><i class="fa fa-database"></i></div>
+              <div class="cert-card-header">
+                <div class="cert-title">ORACLE PL/SQL - Top 25%</div>
+                <div class="cert-provider">TestDome</div>
+              </div>
+            </div>
+            <div class="cert-desc">Verified proficiency in Oracle PL/SQL, placing in the top 25% of all assessed candidates worldwide.</div>
+            <a href="Oracle PL_SQL Certificate.pdf" class="cert-link" target="_blank"><i class="fa fa-file-pdf"></i> View Certificate</a>
+          </div>
+          <div class="cert-card">
+            <div class="cert-card-block">
+              <div class="cert-icon"><i class="fa fa-cloud"></i></div>
+              <div class="cert-card-header">
+                <div class="cert-title">Introduction to Cloud Computing</div>
+                <div class="cert-provider">IBM Skills Network</div>
+              </div>
+            </div>
+            <div class="cert-desc">Core concepts of cloud computing, service models (IaaS, PaaS, SaaS), and deployment models.</div>
+            <a href="Introdu ction to Clou d Computing.pdf" class="cert-link" target="_blank"><i class="fa fa-file-pdf"></i> View Certificate</a>
+          </div>
+          <div class="cert-card">
+            <div class="cert-card-block">
+              <div class="cert-icon"><i class="fa fa-terminal"></i></div>
+              <div class="cert-card-header">
+                <div class="cert-title">Commands and Shell Scripting</div>
+                <div class="cert-provider">IBM Skills Network</div>
+              </div>
+            </div>
+            <div class="cert-desc">Linux command-line proficiency and shell scripting for automation and system administration tasks.</div>
+            <a href="Introdu ction to Linux Commands and Shell Scripting.pdf" class="cert-link" target="_blank"><i class="fa fa-file-pdf"></i> View Certificate</a>
+          </div>
+          <div class="cert-card">
+            <div class="cert-card-block">
+              <div class="cert-icon"><i class="fab fa-github"></i></div>
+              <div class="cert-card-header">
+                <div class="cert-title">Git and GitHub</div>
+                <div class="cert-provider">IBM Skills Network</div>
+              </div>
+            </div>
+            <div class="cert-desc">Version control fundamentals, branching strategies, pull requests, and collaborative development workflows.</div>
+            <a href="Getting Started with Git and GitHub.pdf" class="cert-link" target="_blank"><i class="fa fa-file-pdf"></i> View Certificate</a>
+          </div>
+          <div class="cert-card">
+            <div class="cert-card-block">
+              <div class="cert-icon"><i class="fa fa-sync-alt"></i></div>
+              <div class="cert-card-header">
+                <div class="cert-title">Introduction to Agile Development and Scrum</div>
+                <div class="cert-provider">IBM Skills Network</div>
+              </div>
+            </div>
+            <div class="cert-desc">Agile methodology principles, Scrum framework, sprint planning, and iterative product development practices.</div>
+            <a href="Introdu ction to Agile Development and Scrum.pdf" class="cert-link" target="_blank"><i class="fa fa-file-pdf"></i> View Certificate</a>
+          </div>
+          <div class="cert-card">
+            <div class="cert-card-block">
+              <div class="cert-icon"><i class="fa fa-shield-alt"></i></div>
+              <div class="cert-card-header">
+                <div class="cert-title">Practical Cyber Security</div>
+                <div class="cert-provider">Scientific Cyber Security Association</div>
+              </div>
+            </div>
+            <div class="cert-desc">Hands-on cybersecurity practices covering vulnerability assessment, threat mitigation, and secure coding principles.</div>
+            <a href="Practical Cyber Security.pdf" class="cert-link" target="_blank"><i class="fa fa-file-pdf"></i> View Certificate</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUBLICATIONS -->
+      <section id="publications" class="section">
+        <h2 class="section-heading"><i class="fa fa-newspaper"></i> Publications</h2>
+        <div class="pubs-grid">
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron1.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Orbital Organoid-Quantum Intelligence</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">💥 Terrifyingly beautiful integration of biology and machines moving off-planet 🛰️ If this feels like Sci-Fi, you aren't paying attention to stuff that is happening ...</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/orbital-organoid-quantum-intelligence-irakli-gzirishvili-hlt4f" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron2.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">The Genesis Code</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🤔 Genesis serves as the ultimate lossy compression - It takes billions of years of chemical and biological data and compresses them into a narrative that even a child can understand.</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/genesis-code-irakli-gzirishvili-5jfgf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron3.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">The 10,000-Year Hard Drive</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🤔 If you could etch just ONE terabyte of data into a piece of glass to be discovered 10,000 years from now, what would you save? 👉 Let me know in the comments below!</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/10000-year-hard-drive-irakli-gzirishvili-avuvf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron4.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Quantum Teleportation - It's Real</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🤯 Researchers pulled off wild stuff 🤔 sending quantum info through real internet cables? ... linking separate quantum chips? ... and even teleporting data into quantum memory? ... Check out latest edition 👇</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/quantum-teleportation-its-real-irakli-gzirishvili-gkkif" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron5.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">BioComputers & Organoid Intelligence - It's Real</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🤔 What if your next computer wasn't made of silicon - but living brain cells? 🧠 And how these living systems work? 👉 Check out CreaTron's latest article . . .</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/biocomputers-organoid-intelligence-its-real-irakli-gzirishvili-x48ff" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron6.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">AI Terminology / Casual Guide</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🙌 I just put together a super casual guide to the AI buzzwords... just simple explanations - Check it out and get up to speed! 👇</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/ai-terminology-casual-guide-irakli-gzirishvili-ekrkf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron7.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Will OpenAI Kill Personal Computers and Wipe Out AI Startups Along the Way?</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">😐 Say goodbye to laptops (PCs) and AI SaaS tools? 🤔 And what happens to all those AI Startups when ChatGPT will do everything they do… better, faster and all in one place?</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/openai-kill-personal-computers-wipe-out-ai-startups-way-gzirishvili-1eftf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron8.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Intergalactic Real Estate</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🤣 Turns out, people are selling land on planets - and others are buying it... 😂 Celebs, corporations and your weird cousin who once tried to mine Bitcoin from a toaster... they're all in...</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/intergalactic-real-estate-irakli-gzirishvili-zofpf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron9.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">The Drone Age</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🤔 Drones aren't just flying cameras anymore... 😕 Let's peek into 2 very different futures for drones and the humans they touch ...</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/drone-age-irakli-gzirishvili-ptolf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron10.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Price of a Second</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🤔 What does an electron, your CPU and the fabric of existence have in common? . . .</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/price-second-ig--j9tvf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron11.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Open-Source Licensing Dilemma</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🤔 Guys... check out this quick breakdown of the real challenges behind open-source licensing - just the stuff you should actually know....</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/open-source-licensing-dilemma-ig--pl4kf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron12.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Hype-Driven AI Fundraising</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">💥 You've seen it - A flashy AI demo drops, the founder raises millions overnight and a few months later... silence.</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/hype-driven-ai-fundraising-ig--7frif" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron13.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Storing Data In DNA - It's Real</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">✅ Guys... this is real - DNA as storage 🧬 Read this, then imagine combining it with quantum computers... Wild Stuff ❗️❗️❗️</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/storing-data-dna-its-real-ig--f4xjf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron14.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Software Powering Humanoid Robots</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">⚠️ From the code that controls their movements to the AI that lets them learn, the software in humanoid robots is a fascinating world - Let's explore the languages and techniques that are shaping the future of robotics ...</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/software-powering-humanoid-robots-ig--p3nzf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron15.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Non-US Challenges - Remote Jobs</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">😐 The path to a US remote software engineering job isn't easy for non-US individuals - Let's dive in ...</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/non-us-challenges-remote-jobs-ig--legof" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron16.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Software Engineer at SpaceX ?</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">😎 As promised... let's dive into what it's like to be a software engineer at SpaceX 🚀 Ready for launch? Go!</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/software-engineer-spacex-ig--jxeuf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron17.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Terms of Use? or Terms of Trap?</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">⚡ As promised - about something that often gets overlooked, but you gotta know... 😎 Let's Go!</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/terms-use-trap-ig--r3e1f" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron18.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Quantum Software Engineering</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">⚠️ Let's dive into how Quantum Software Engineering would feel like ... ⚡ Don't forget to follow CreaTron, for tomorrow's game-changing topics!</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/quantum-software-engineering-ig--ahnvf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron19.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Decoding Software Engineering Recruitment</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🚧 Decoding Software Engineering Recruitment ... ⚡ Don't forget to follow CreaTron, for tomorrow's game-changing topics!</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/decoding-software-engineering-recruitment-ig--5gjcf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron20.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">FrameComplication Phenomenon</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">⚠ FrameComplication Phenomenon ⚠ Let's dive into a topic that many developers feel deeply ...</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/framecomplication-phenomenon-ig--vhdkf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron21.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Building & Launching Projects - Solo</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">⚡ Key Considerations for Solo Founders in Building and Launching Projects ... ⚡ Don't forget to follow CreaTron, for tomorrow's game-changing topics!</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/building-launching-projects-solo-ig--aow9f" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron22.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Side Projects</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">🧐 Let's talk about the concept of "Side Projects" - what they truly mean ... ⚡ Don't forget to follow CreaTron, for tomorrow's game-changing topics!</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/side-projects-ig-onli-zhjgf" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+          <div class="pub-card">
+            <img class="pub-poster" src="creatron23.png" alt=" " />
+            <div class="pub-body">
+              <div class="pub-title">Future With AI</div>
+              <div class="pub-author">Irakli Gzirishvili</div>
+              <div class="pub-intro">😄 Check out my thoughts on this topic - and share yours in the comments... ⚡ Don't forget to follow CreaTron, for tomorrow's game-changing topics!</div>
+              <a class="pub-link" href="https://www.linkedin.com/pulse/future-ai-ig-onli-k34df" target="_blank"><i class="fab fa-linkedin"></i> Read on LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section">
+        <h2 class="section-heading"><i class="fa fa-envelope"></i> Contact</h2>
+        <div class="contact-cards">
+          <a class="contact-card" href="https://linkedin.com/in/ig-link" target="_blank">
+            <div class="contact-icon li"><i class="fab fa-linkedin"></i></div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-val">linkedin.com/in/ig-link</div>
+          </a>
+          <a class="contact-card" href="https://github.com/IG-onGit" target="_blank">
+            <div class="contact-icon gh"><i class="fab fa-github"></i></div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-val">github.com/IG-onGit</div>
+          </a>
+          <a class="contact-card" href="https://x.com/IG_onX" target="_blank">
+            <div class="contact-icon x"><i class="fab fa-x-twitter"></i></div>
+            <div class="contact-label">X / Twitter</div>
+            <div class="contact-val">@IG_onX</div>
+          </a>
+          <a class="contact-card" href="mailto:gziraklirex@gmail.com">
+            <div class="contact-icon em"><i class="fa fa-envelope"></i></div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val">gziraklirex@gmail.com</div>
+          </a>
+          <a class="contact-card" href="tel:+995555265589">
+            <div class="contact-icon ph"><i class="fa fa-phone"></i></div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-val">+995 555 26 55 89</div>
+          </a>
+        </div>
+        <div class="availability">
+          <p><span class="avail-dot"></span>Available for new opportunities - I have already done what you need. Let's talk about what we can build together.</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      function showSection(id, el) {
+        document.querySelectorAll(".section").forEach((s) => s.classList.remove("active"));
+        document.querySelectorAll(".nav-item").forEach((n) => n.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+        el.classList.add("active");
+        if (window.innerWidth <= 900) toggleSidebar();
+      }
+
+      function toggleDetails(btn) {
+        const details = btn.closest(".exp-block").querySelector(".exp-details");
+        const open = details.classList.toggle("open");
+        btn.classList.toggle("open", open);
+        btn.innerHTML = open ? '<i class="fa fa-chevron-up"></i> Close' : '<i class="fa fa-chevron-down"></i> Details';
+      }
+
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("open");
+        document.getElementById("overlay").classList.toggle("show");
+      }
+    </script>
+  </body>
+</html>
