@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -272,7 +272,9 @@
         border-radius: 12px;
         padding: 18px 14px;
         text-align: center;
-        transition: transform 0.2s, border-color 0.2s;
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
       }
       .kpi:hover {
         transform: translateY(-3px);
@@ -312,7 +314,9 @@
         border-radius: 12px;
         margin-bottom: 18px;
         overflow: hidden;
-        transition: border-color 0.2s, box-shadow 0.2s;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
       }
       .exp-block:hover {
         box-shadow: 0 6px 24px rgba(0, 217, 255, 0.1);
@@ -440,7 +444,10 @@
         border: 1px solid var(--border);
         border-radius: 14px;
         overflow: hidden;
-        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          border-color 0.2s;
         display: flex;
         flex-direction: column;
       }
@@ -562,7 +569,9 @@
         border: 1px solid var(--border);
         border-radius: 12px;
         padding: 22px;
-        transition: border-color 0.2s, transform 0.2s;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
       }
       .skill-cat:hover {
         border-color: var(--cyan);
@@ -967,14 +976,14 @@
         <div class="role">AI Integration Manager</div>
       </div>
       <nav>
-        <div class="nav-item active" onclick="showSection('about',this)"><i class="fa fa-user"></i> About</div>
-        <div class="nav-item" onclick="showSection('experience',this)"><i class="fa fa-briefcase"></i> Experience</div>
-        <div class="nav-item" onclick="showSection('projects',this)"><i class="fa fa-code-branch"></i> Projects</div>
-        <div class="nav-item" onclick="showSection('hardskills',this)"><i class="fa fa-microchip"></i> Hard Skills</div>
-        <div class="nav-item" onclick="showSection('softskills',this)"><i class="fa fa-brain"></i> Soft Skills</div>
-        <div class="nav-item" onclick="showSection('certifications',this)"><i class="fa fa-certificate"></i> Certifications</div>
-        <div class="nav-item" onclick="showSection('publications',this)"><i class="fa fa-newspaper"></i> Publications</div>
-        <div class="nav-item" onclick="showSection('contact',this)"><i class="fa fa-envelope"></i> Contact</div>
+        <div class="nav-item active" onclick="showSection('about', this)"><i class="fa fa-user"></i> About</div>
+        <div class="nav-item" onclick="showSection('experience', this)"><i class="fa fa-briefcase"></i> Experience</div>
+        <div class="nav-item" onclick="showSection('projects', this)"><i class="fa fa-code-branch"></i> Projects</div>
+        <div class="nav-item" onclick="showSection('hardskills', this)"><i class="fa fa-microchip"></i> Hard Skills</div>
+        <div class="nav-item" onclick="showSection('softskills', this)"><i class="fa fa-brain"></i> Soft Skills</div>
+        <div class="nav-item" onclick="showSection('certifications', this)"><i class="fa fa-certificate"></i> Certifications</div>
+        <div class="nav-item" onclick="showSection('publications', this)"><i class="fa fa-newspaper"></i> Publications</div>
+        <div class="nav-item" onclick="showSection('contact', this)"><i class="fa fa-envelope"></i> Contact</div>
       </nav>
       <div class="sidebar-footer">
         <a href="https://linkedin.com/in/ig-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -1143,6 +1152,19 @@
       <section id="projects" class="section">
         <h2 class="section-heading"><i class="fa fa-code-branch"></i> Projects</h2>
         <div class="projects-grid">
+          <div class="proj-card">
+            <img class="proj-poster" src="myplans.png" alt=" " />
+            <div class="proj-body">
+              <div class="proj-name">MyPlans</div>
+              <div class="proj-role">Creator - VS Code Extension</div>
+              <div class="proj-desc">A personal task manager built as a VS Code extension that reads your `.yml` / `.yaml` files directly and gives you a Monokai-themed sidebar panel to plan, track, and deploy your work - without leaving your editor.</div>
+              <div class="proj-footer">
+                <span class="proj-stat"><i class="fa fa-download"></i>Just Released</span>
+                <span class="proj-status live">Find on VS Code Extensions</span>
+              </div>
+            </div>
+          </div>
+
           <div class="proj-card">
             <img class="proj-poster" src="aisi.png" alt=" " />
             <div class="proj-body">
